@@ -23,3 +23,11 @@ Example:
 ```Td
 (q0, 1, 0, R, q1);
 ```
+
+Comments can be done as in Java, using "//"
+
+## Execution
+Download Processing from [the Processing webpage](https://processing.org/download/). Then, create the file with the code inside the "data" folder. After that, open one of the .pde files using processing (it will open the project) and change the program name in the TuringMachine.pde to whatever you named yours. Execute the project and watch as the code executes
+
+## License
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
