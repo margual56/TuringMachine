@@ -1,10 +1,15 @@
-String program = "Example1.tm";
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+//The default Turing program to execute
+String program = "program.tm";
+
 TMd turing;
 String text;
 boolean pause = false, finished;
 int state = 1;
 
-void setup() {
+void setup() {  
   size(1200, 1000);
 
   finished = false;
@@ -15,7 +20,10 @@ void setup() {
     turing= new TMd(program);
   }
   catch(Exception e) {
+    JOptionPane.showMessageDialog(frame, "\"program.tm\" does not exist");
     print(e);
+    exit();
+    return;
   }
 
   text = turing.toString();
@@ -37,7 +45,7 @@ void draw() {
   textSize(60);
   textAlign(LEFT, TOP);
   fill(255);
-  
+
   if (state == -1)
     text(String.format("Output: %s", ((char)193) + ""), 50, 350);
   else
