@@ -316,8 +316,8 @@ public class TM {
 	}
 
 	public String output() {
-		if (undefined)
-			return ((char) 193) + "";
+		//if (undefined)
+			//return ((char) 193) + "";
 
 		int sum = 0;
 
