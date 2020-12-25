@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class SyntaxError extends Exception {
 	String str = "";
 

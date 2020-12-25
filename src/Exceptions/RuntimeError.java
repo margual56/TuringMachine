@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class RuntimeError extends Exception {
 	String str = "";
 

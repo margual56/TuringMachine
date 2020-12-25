@@ -3,6 +3,7 @@ package app;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class FileChooser extends JFileChooser {
 	public FileChooser() {
 		this(null);
