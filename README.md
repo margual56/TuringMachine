@@ -1,7 +1,8 @@
 # TuringMachine
 A Turing machine interpreter made in Java using Processing libraries.
 
-![](resources/turing.gif)
+![](resources/turing.gif)<br/>
+_This is the [Example2.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) program running in real time_
 
 ## Description
 In [this Wikipedia article](https://en.wikipedia.org/wiki/Turing_machine) it is explained what a Turing machine is.
