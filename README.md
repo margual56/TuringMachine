@@ -25,7 +25,7 @@ Example:
 
 Comments can be written using `//`
 
-So a fully-working program would look like this (from [Example1.tm](https://github.com/margual56/TuringMachine/blob/8517c6134f74cfb1042d1a34e34811b2b86143bd/Examples/Example1.tm)):
+So a fully-working program would look like this (from [Example1.tm](https://github.com/margual56/TuringMachine/blob/8517c6134f74cfb1042d1a34e34811b2b86143bd/Examples/Example1.tm), it add the two input numbers):
 ```Td
 {q011101111};
 
@@ -39,7 +39,7 @@ So a fully-working program would look like this (from [Example1.tm](https://gith
 (q2, 0, 1, L, q3);
 (q2, 1, 1, R, q2);
 
-(q3, 1, 0, L ,q4);
+(q3, 1, 1, L ,q4);
 
 (q4, 1, 1, L, q4);
 (q4, 0, 0, L, q5);//2
