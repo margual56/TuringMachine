@@ -13,7 +13,7 @@ import processing.core.PApplet;
 
 public class MainWindow extends PApplet {
 	//The default Turing program to execute
-	String program = "program.tm";
+	String program = "";
 
 	TMd turing;
 	String text;
@@ -28,31 +28,34 @@ public class MainWindow extends PApplet {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
+			System.err.println("Can't set look to \"WindowsLookAndFeel\", what a shame");
 		}
 		
-		JFileChooser j = new JFileChooser();
-		j.setDialogTitle("Select a Turing Machine Code file");
-
-		// only allow files of .tm extension 
-        j.setAcceptAllFileFilterUsed(false); 
-		FileNameExtensionFilter restrict = new FileNameExtensionFilter("Turing Machine files (.tm)", "tm");
-		j.addChoosableFileFilter(restrict);
-
-		// invoke the showsOpenDialog function to show the save dialog 
-		int r = j.showOpenDialog(null);
-
-		// if the user selects a file 
-		if (r == JFileChooser.APPROVE_OPTION) {
-			// set the label to the path of the selected file 
-			program = j.getSelectedFile().getAbsolutePath();
+		if(program.isBlank()) {
+			String workingDirectory = Paths.get("").toAbsolutePath().toString();
+			JFileChooser j = new JFileChooser(workingDirectory);
+			j.setDialogTitle("Select a Turing Machine Code file");
+	
+			// only allow files of .tm extension 
+	        j.setAcceptAllFileFilterUsed(false); 
+			FileNameExtensionFilter restrict = new FileNameExtensionFilter("Turing Machine files (.tm)", "tm");
+			j.addChoosableFileFilter(restrict);
+	
+			// invoke the showsOpenDialog function to show the save dialog 
+			int r = j.showOpenDialog(null);
+	
+			// if the user selects a file 
+			if (r == JFileChooser.APPROVE_OPTION) {
+				// set the label to the path of the selected file 
+				program = j.getSelectedFile().getAbsolutePath();
+			}
+			// if the user cancelled the operation 
+			else {
+				exit();
+				return;
+			}
 		}
-		// if the user cancelled the operation 
-		else {
-			exit();
-			return;
-		}
-
+		
 		finished = false;
 		text = "";
 		state = 1;
@@ -89,19 +92,9 @@ public class MainWindow extends PApplet {
 			text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
 		else*/
 			text(String.format("Output: %s", turing.output()), 50, 350);
-
-		if (!pause && !finished && frameCount % 10 == 0) {
-			if (state <= 0)
-				finished = true;
-
-			try {
-				state = turing.update();
-				text = turing.printTape();
-			} catch (Exception error) {
-				print(error);
-				finished = true;
-			}
-		}
+			
+		if (!pause && !finished && frameCount % 10 == 0)
+			doStep();
 
 		fill(255);
 		textSize(60);
@@ -110,10 +103,20 @@ public class MainWindow extends PApplet {
 	}
 
 	public void keyPressed() {
-		if (finished)
+		if(key == ' ') {
+			if (finished)
+				frameCount = -1;
+			else
+				pause = !pause;
+		}else if(keyCode == RIGHT) {
+			doStep();
+		}else if(keyCode == ENTER) {
+			while(!finished)
+				doStep();
+		}else if(key == 'r') {
+			program = "";
 			frameCount = -1;
-		else
-			pause = !pause;
+		}
 	}
 
 	int sign(float n) {
@@ -123,6 +126,19 @@ public class MainWindow extends PApplet {
 		return round(abs(n) / n);
 	}
 
+	private void doStep() {	
+		if (state <= 0)
+			finished = true;
+	
+		try {
+			state = turing.update();
+			text = turing.printTape();
+		} catch (Exception error) {
+			print(error);
+			finished = true;
+		}	
+	}
+	
 	public static void main(String[] args) {
 		String[] processingArgs = {"Turing Machine"};
 		MainWindow mySketch = new MainWindow();
