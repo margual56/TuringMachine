@@ -64,6 +64,9 @@ When you execute it, it will prompt you to select the ".tm" file (the turing mac
   * `enter` -> Jump to the end of the execution
   * `r` -> Stop, load a new program and run it
   * `ESC` -> Exit cleanly
+  * `+` -> Increase speed
+  * `-` -> Decrease speed
+  * `=` -> Restore initial speed
   * Currently, there is no way to speed up/down the execution whithout modifying the code, but it is possible.
 
 # License
