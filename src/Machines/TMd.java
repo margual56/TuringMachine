@@ -12,7 +12,7 @@ import processing.core.PApplet;
  * the Turing Machine and draws it to the screen. This implementation needs the
  * <a href="https://processing.org/">Processing</a> "core.jar" library.
  * 
- * @author Marcos Gutiérrez Alonso
+ * @author Marcos Gutiï¿½rrez Alonso
  * @version 1.0
  */
 public class TMd extends TM {
@@ -122,31 +122,23 @@ public class TMd extends TM {
 	public void show(float x0, float y, float wid, float hei, int headspace, PApplet app) throws RuntimeError {
 		float cs = Math.min(wid / (headspace * 2), hei);
 
-		app.textAlign(PApplet.CENTER, PApplet.CENTER);
-		app.textSize(cs * 0.9f);
+		stroke(255);
+		strokeWeight(5);
+		noFill();
+		needle(width/2, height/2+hei, cs, app);
+		strokeWeight(1);
+	}
 
-		float x, offset = PApplet.lerp(tmpHead, this.head, tapeCounter);
-		float middle_x = x0 + wid / 2;
-
-		app.stroke(255);
-		for (int i = Math.min(0, this.head - headspace); i < Math.max(this.head + headspace, this.tape.length + 1); i++) {
-			x = middle_x + cs * (i - offset);
-
-			if (x < x0 || x >= x0 + wid)
-				continue;
-
-			app.fill(0);
-			app.rect(x, y, cs, cs);
-			app.fill(255);
-			app.text(getTape(i), x + cs / 2, y + cs * 0.4f);
-		}
-
-		if (tapeCounter == 1) {
-			tapeCounter = 0;
-			tmpHead = this.head;
-			changing = false;
-		} else if (changing) {
-			tapeCounter += 0.1;
-		}
+	void needle(float x, float y, float size, PApplet app){
+		float xOffset = x-size/2;
+		float yOffset = y-size/2;
+		
+		app.beginShape();
+		app.vertex(size/2  + xOffset, -size/2   + yOffset);
+		app.vertex(size    + xOffset, size/3    + yOffset);
+		app.vertex(size    + xOffset, size      + yOffset);
+		app.vertex(0       + xOffset, size      + yOffset);
+		app.vertex(0       + xOffset, size/3    + yOffset);
+		app.endShape(CLOSE);
 	}
 }
