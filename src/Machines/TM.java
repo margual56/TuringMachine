@@ -14,7 +14,7 @@ import Exceptions.SyntaxError;
  * Basic implementation of the Turing Machine. This is not graphical, it just
  * processes the tape, the states and the code.
  * 
- * @author Marcos Gutiérrez Alonso
+ * @author Marcos Gutiï¿½rrez Alonso
  * @version 2.0
  *
  */
@@ -210,8 +210,7 @@ public class TM {
 	/**
 	 * 
 	 * 
-	 * @param "R"
-	 *            or "L"
+	 * @param m "R" or "L"
 	 * @throws RuntimeError
 	 */
 	protected void move(String m) throws RuntimeError {
