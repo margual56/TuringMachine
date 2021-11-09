@@ -1,6 +1,6 @@
 package Exceptions;
 
-import javax.swing;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class SyntaxError extends Exception {

@@ -93,20 +93,24 @@ public class MainWindow extends PApplet {
 			text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
 		else
 			text(String.format("Output: %s", turing.output()), 50, 350);
-			
+
 		if (!pause && !finished && frameCount % fps == 0)
 			doStep();
 
-		fill(255);
-		textSize(60);
-		textAlign(LEFT, CENTER);
-		text(text, 50, height * 0.65f);
+//		fill(255);
+//		textSize(60);
+//		textAlign(LEFT, CENTER);
+//		text(text, 50, height * 0.65f);
 		
 
 		fill(255);
 		textSize(20);
 		textAlign(RIGHT, BOTTOM);
 		text("FPS: " + nfc(frameRate/fps, 2), width-50, height-50);
+		
+		noFill();
+		stroke(255);
+		turing.show(0, height/2, width, 50, 0, this);
 	}
 
 	public void keyPressed() {

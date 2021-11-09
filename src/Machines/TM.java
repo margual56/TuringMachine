@@ -275,7 +275,7 @@ public class TM {
 		return t + "};";
 	}
 
-	protected String getTape(int index) {
+	public String getTape(int index) {
 		// If out of bounds, return zero (the tape is technically infinite)
 		if (index < 0 || index >= tape.length)
 			return "0";
@@ -283,6 +283,14 @@ public class TM {
 		return Character.toString(tape[index]);
 	}
 
+	public int getTapeLength() {
+		return tape.length;
+	}
+	
+	public int getHead() {
+		return head;
+	}
+	
 	@Override
 	public String toString() {
 		String out = "";
@@ -314,6 +322,10 @@ public class TM {
 		return out;
 	}
 
+	public String getState() {
+		return state;
+	}
+	
 	public String output() {
 		//if (undefined)
 			//return ((char) 193) + "";

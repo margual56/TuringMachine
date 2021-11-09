@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import Exceptions.RuntimeError;
 import Exceptions.SyntaxError;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 /**
  * "TMd" stands for "Turing Machine draw". Extends the basic functionality of
@@ -19,6 +20,8 @@ public class TMd extends TM {
 	private float tapeCounter = 0;
 	private float tmpHead;
 	private boolean changing = false;
+	private PVector headPosition = new PVector(0, 0);
+	private float prevLeftIndex = -1, prevRightIndex = -1;
 
 	public TMd(Path code) throws SyntaxError, IOException {
 		super(code);
@@ -119,17 +122,58 @@ public class TMd extends TM {
 		}
 	}
 
-	public void show(float x0, float y, float wid, float hei, int headspace, PApplet app) throws RuntimeError {
-		float cs = Math.min(wid / (headspace * 2), hei);
+	public void show(float x0, float y0, float wid, float hei, int headspace, PApplet app){
+		int maxCells = 20;
+		float cs = Math.min(wid / maxCells, hei);
+		
+		int len = getTapeLength();
+		int head = getHead();
+		
+		int leftIndex = (head < maxCells/2.0)? 0 : (int)Math.floor(head-maxCells/2.0);
+		int rightIndex = (len-head < maxCells/2.0)? len : (int)Math.ceil(head+maxCells/2.0);
 
-		stroke(255);
-		strokeWeight(5);
-		noFill();
-		needle(width/2, height/2+hei, cs, app);
-		strokeWeight(1);
+		
+		float middlePoint = (x0+wid/2) - cs/2;
+		
+		app.textAlign(PApplet.CENTER, PApplet.BOTTOM);
+		for(int i = head, index = 0; i>=leftIndex; i--, index++) {
+			String val = getTape(i);
+			
+			if(val.equals("1")) {
+				app.fill(255, 0, 0, 50);
+			}else {
+				app.noFill();
+			}
+			
+			app.rect(middlePoint-index*cs, y0, cs, cs);
+			
+			app.fill(255);
+			app.text(val, middlePoint-index*cs + cs/2.0f, y0+cs/2);
+		}
+		
+		for(int i = head+1, index = 1; i<rightIndex; i++, index++) {
+			String val = getTape(i);
+			
+			if(val.equals("1")) {
+				app.fill(255, 0, 0, 50);
+			}else {
+				app.noFill();
+			}
+			
+			app.rect(middlePoint+index*cs, y0, cs, cs);
+			
+			app.fill(255);
+			app.text(val, middlePoint+index*cs + cs/2.0f, y0+cs/2);
+		}
+		
+		app.stroke(255);
+		app.strokeWeight(5);
+		app.noFill();
+		needle(x0+wid/2.0f, y0+hei*1.75f, cs, getState(), app);
+		app.strokeWeight(1);
 	}
 
-	void needle(float x, float y, float size, PApplet app){
+	void needle(float x, float y, float size, String state, PApplet app){
 		float xOffset = x-size/2;
 		float yOffset = y-size/2;
 		
@@ -139,6 +183,10 @@ public class TMd extends TM {
 		app.vertex(size    + xOffset, size      + yOffset);
 		app.vertex(0       + xOffset, size      + yOffset);
 		app.vertex(0       + xOffset, size/3    + yOffset);
-		app.endShape(CLOSE);
+		app.endShape(PApplet.CLOSE);
+
+		app.fill(255);
+		app.textAlign(PApplet.CENTER, PApplet.CENTER);
+		app.text(state, size/2 + xOffset, size/2 + yOffset);
 	}
 }
