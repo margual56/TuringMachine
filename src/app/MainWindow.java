@@ -19,6 +19,7 @@ public class MainWindow extends PApplet {
 	String text;
 	boolean pause = false, finished;
 	int state = 1;
+	int fps = 10;
 
 	public void settings() {
 		size(1200, 1000);
@@ -88,18 +89,24 @@ public class MainWindow extends PApplet {
 		textAlign(LEFT, TOP);
 		fill(255);
 
-		/*if (state == -1)
+		if (state == -1)
 			text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
-		else*/
+		else
 			text(String.format("Output: %s", turing.output()), 50, 350);
 			
-		if (!pause && !finished && frameCount % 10 == 0)
+		if (!pause && !finished && frameCount % fps == 0)
 			doStep();
 
 		fill(255);
 		textSize(60);
 		textAlign(LEFT, CENTER);
 		text(text, 50, height * 0.65f);
+		
+
+		fill(255);
+		textSize(20);
+		textAlign(RIGHT, BOTTOM);
+		text("FPS: " + nfc(frameRate/fps, 2), width-50, height-50);
 	}
 
 	public void keyPressed() {
@@ -116,6 +123,12 @@ public class MainWindow extends PApplet {
 		}else if(key == 'r') {
 			program = "";
 			frameCount = -1;
+		}else if(key == '-') {
+			fps +=1;
+		}else if(key == '+') {
+			fps = constrain(fps-5, 1, fps);
+		}else if(key == '=') {
+			fps = 10;
 		}
 	}
 
