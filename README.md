@@ -67,7 +67,6 @@ When you execute it, it will prompt you to select the ".tm" file (the turing mac
   * `+` -> Increase speed
   * `-` -> Decrease speed
   * `=` -> Restore initial speed
-  * Currently, there is no way to speed up/down the execution whithout modifying the code, but it is possible.
 
 # License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
