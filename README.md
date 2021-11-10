@@ -2,7 +2,7 @@
 A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter made in Java using Processing libraries.
 
 ![](resources/turing.gif)<br/>
-_This is the [Example2.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) program running in real time_
+_This is the [Example1.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) (which adds the two input numbers) running in real time_
 
 ## Programming in Turing Machine code
 Inside the [exmaples folder](https://github.com/margual56/TuringMachine/tree/master/Examples), there are 5 example programs of how to code a Turing Machine program. The extension of the files __has__ to be `.tm`.
