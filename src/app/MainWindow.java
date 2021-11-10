@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Exceptions.RuntimeError;
 import Exceptions.SyntaxError;
+
 import Machines.TM;
 import Machines.TMd;
 import processing.core.PApplet;
