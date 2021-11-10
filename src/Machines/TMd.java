@@ -3,9 +3,9 @@ package Machines;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import Exceptions.RuntimeError;
 import Exceptions.SyntaxError;
 import processing.core.PApplet;
-import processing.core.PVector;
 
 /**
  * "TMd" stands for "Turing Machine draw". Extends the basic functionality of
@@ -16,13 +16,24 @@ import processing.core.PVector;
  * @version 1.0
  */
 public class TMd extends TM {
-	private PVector headPosition = new PVector(0, 0);
-	public TMd(Path code) throws SyntaxError, IOException {
+	private float transition;
+	private int prevHead = -1;
+	private String prevInstruction;
+	
+	private static int MAX_CELLS = 25;
+	
+	public TMd(Path code) throws SyntaxError, IOException, RuntimeError {
 		super(code);
+		
+		prevHead = head;
+		prevInstruction = getCurrentInstruction();
 	}
 
-	public TMd(Path code, String initialState) throws SyntaxError, IOException {
+	public TMd(Path code, String initialState) throws SyntaxError, IOException, RuntimeError {
 		super(code, initialState);
+		
+		prevHead = head;
+		prevInstruction = getCurrentInstruction();
 	}
 
 	@Override
@@ -108,16 +119,23 @@ public class TMd extends TM {
 		}
 	}
 
-	public void show(float x0, float y0, float wid, float hei, int headspace, PApplet app){
-		int maxCells = 20;
-		float cs = Math.min(wid / maxCells, hei);
-		
+	public void show(float x0, float y0, float wid, float hei, int headspace, PApplet app){		
+		float cs = Math.max(wid/MAX_CELLS, hei);
+
 		int len = getTapeLength();
 		int head = getHead();
 		
-		int leftIndex = (head < maxCells/2.0)? 0 : (int)Math.floor(head-maxCells/2.0);
-		int rightIndex = (len-head < maxCells/2.0)? len : (int)Math.ceil(head+maxCells/2.0);
-
+		int leftIndex, rightIndex;
+		if(head != prevHead) {
+			leftIndex = (prevHead < MAX_CELLS/2.0)? 0 : (int)Math.floor(head-MAX_CELLS/2.0);
+			rightIndex = (len-prevHead < MAX_CELLS/2.0)? len : (int)Math.ceil(head+MAX_CELLS/2.0);
+			
+			app.pushMatrix();
+			app.translate(PApplet.lerp(Math.signum(head-prevHead)*cs, 0, transition), 0);
+		}else {
+			leftIndex = (prevHead < MAX_CELLS/2.0)? 0 : (int)Math.floor(prevHead-MAX_CELLS/2.0);
+			rightIndex = (len-prevHead < MAX_CELLS/2.0)? len : (int)Math.ceil(prevHead+MAX_CELLS/2.0);
+		}
 		
 		float middlePoint = (x0+wid/2) - cs/2;
 		
@@ -151,12 +169,40 @@ public class TMd extends TM {
 			app.fill(255);
 			app.text(val, middlePoint+index*cs + cs/2.0f, y0+cs/2);
 		}
+
+		if(head != prevHead) {
+			app.popMatrix();
+		}
 		
 		app.stroke(255);
 		app.strokeWeight(5);
 		app.noFill();
 		needle(x0+wid/2.0f, y0+hei*1.75f, cs, getState(), app);
 		app.strokeWeight(1);
+	}
+	
+	public void animateTape(float fps, PApplet app) throws RuntimeError {
+		if(head != prevHead) {
+			if(transition == 0) transition = 0.01f;
+			else transition += 50/(app.frameRate*fps);
+			
+			if(transition > 0.99) {
+				transition = 0;
+				prevHead = head;
+				prevInstruction = getCurrentInstruction();
+			}
+		}
+	}
+	
+	public boolean finishedTransition() {
+		return head == prevHead || transition > 0.99 ;
+	}
+	
+	public String getInstruction() throws RuntimeError {
+		if(!finishedTransition() || transition <= 0.5)
+			return prevInstruction;
+		else
+			return getCurrentInstruction();
 	}
 
 	void needle(float x, float y, float size, String state, PApplet app){
