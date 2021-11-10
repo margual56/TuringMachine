@@ -138,8 +138,6 @@ public class TM {
 
 		for (i = 0; i < tape.length; i++)
 			tape[i] = state.charAt(i);
-		
-		System.out.println(tape);
 	}
 
 	/**

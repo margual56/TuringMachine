@@ -4,8 +4,25 @@ A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter mad
 ![](resources/turing.gif)<br/>
 _This is the [Example1.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) (which adds the two input numbers) running in real time_
 
+## Using the Turing Machine in the CLI
+```
+Usage: java -jar TuringMachine.jar [options]
+				
+	A simple Turing Machine simulator with a GUI. It uses the syntax we use at class in Computability (EPI Gijón).
+				
+Optional arguments:
+	(none)			Run the program normally (GUI mode)
+	-h, --help		Show this help message and exit
+	--headless FILE		Run in headless mode (print the result and exit, no GUI)
+	-e, --example		Print an example program and exit
+					
+Note:
+	You can only provide one argument at a time. If more than one is provided, just the first one is going to be taken into account.
+```
+
+
 ## Programming in Turing Machine code
-Inside the [exmaples folder](https://github.com/margual56/TuringMachine/tree/master/Examples), there are 5 example programs of how to code a Turing Machine program. The extension of the files __has__ to be `.tm`.
+Inside the [examples folder](https://github.com/margual56/TuringMachine/tree/master/Examples), there are 5 example programs of how to code a Turing Machine program. The extension of the files __has__ to be `.tm`.
 
 Firstly, you define the initial state of the tape (example):
 ```Td
