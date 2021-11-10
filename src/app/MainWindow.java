@@ -79,8 +79,6 @@ public class MainWindow extends PApplet {
 		}
 
 		text = turing.toString();
-
-		frameRate(60);
 	}
 
 	public void draw() {
@@ -177,49 +175,49 @@ public class MainWindow extends PApplet {
 		}	
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		if(args.length == 0) {
 			String[] processingArgs = {"Turing Machine"};
 			MainWindow mySketch = new MainWindow();
 			PApplet.runSketch(processingArgs, mySketch);
-		}
-		
-		for(int i = 0; i<args.length; i++) {
-			if(args[i].compareToIgnoreCase("-h") == 0 || args[i].compareToIgnoreCase("--help") == 0) {
-				System.out.println(help());
-				System.exit(0);
-			}else if(args[i].compareToIgnoreCase("--headless") == 0) {
-				if(i == args.length-1) {
-					System.err.println("You need to provide a file when running the headless mode!");
+		} else {
+			for(int i = 0; i<args.length; i++) {
+				if(args[i].compareToIgnoreCase("-h") == 0 || args[i].compareToIgnoreCase("--help") == 0) {
 					System.out.println(help());
-					System.exit(1);
-				}
-				
-				String file = args[i+1];
-				
-				try {
-					String result = headless(file);
-					
-					System.out.println("Result: " + result);
-					
 					System.exit(0);
-				} catch (SyntaxError | RuntimeError sE) {
-					System.err.println(sE);
-					System.exit(1);
-				} catch (IOException e) {
-					System.err.println("The file \"" + file + "\" does not exist");
-					System.exit(2);
+				}else if(args[i].compareToIgnoreCase("--headless") == 0) {
+					if(i == args.length-1) {
+						System.err.println("You need to provide a file when running the headless mode!");
+						System.out.println(help());
+						System.exit(1);
+					}
+					
+					String file = args[i+1];
+					
+					try {
+						String result = headless(file);
+						
+						System.out.println("Result: " + result);
+						
+						System.exit(0);
+					} catch (SyntaxError | RuntimeError sE) {
+						System.err.println(sE);
+						System.exit(1);
+					} catch (IOException e) {
+						System.err.println("The file \"" + file + "\" does not exist");
+						System.exit(2);
+					}
+					
+				}else if(args[i].compareToIgnoreCase("-e") == 0 || args[i].compareToIgnoreCase("--example") == 0) {
+					System.out.println(example());
+					System.exit(0);
 				}
-				
-			}else if(args[i].compareToIgnoreCase("-e") == 0 || args[i].compareToIgnoreCase("--example") == 0) {
-				System.out.println(example());
-				System.exit(0);
 			}
+			
+			System.err.println("No argument you provided was valid.");
+			System.out.println(help());
+			System.exit(1);
 		}
-		
-		System.err.println("No argument you provided was valid.");
-		System.out.println(help());
-		System.exit(1);
 	}
 	
 	private static String headless(String file) throws SyntaxError, IOException, RuntimeError {
