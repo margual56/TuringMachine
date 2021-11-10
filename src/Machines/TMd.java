@@ -12,24 +12,28 @@ import processing.core.PApplet;
  * the Turing Machine and draws it to the screen. This implementation needs the
  * <a href="https://processing.org/">Processing</a> "core.jar" library.
  * 
- * @author Marcos Gutiérrez Alonso
+ * @author Marcos Gutiï¿½rrez Alonso
  * @version 1.0
  */
 public class TMd extends TM {
-	private float tapeCounter = 0;
-	private float tmpHead;
-	private boolean changing = false;
-
-	public TMd(Path code) throws SyntaxError, IOException {
+	private float transition;
+	private int prevHead = -1;
+	private String prevInstruction;
+	
+	private static int MAX_CELLS = 25;
+	
+	public TMd(Path code) throws SyntaxError, IOException, RuntimeError {
 		super(code);
-
-		tmpHead = head;
+		
+		prevHead = head;
+		prevInstruction = getCurrentInstruction();
 	}
 
-	public TMd(Path code, String initialState) throws SyntaxError, IOException {
+	public TMd(Path code, String initialState) throws SyntaxError, IOException, RuntimeError {
 		super(code, initialState);
-
-		tmpHead = head;
+		
+		prevHead = head;
+		prevInstruction = getCurrentInstruction();
 	}
 
 	@Override
@@ -49,8 +53,6 @@ public class TMd extends TM {
 
 				this.tape = newtape;
 			}
-
-			changing = true;
 		} else if (m.equals("L")) {
 			this.head--;
 
@@ -67,8 +69,6 @@ public class TMd extends TM {
 
 				this.head += 2;
 			}
-
-			changing = true;
 		}
 	}
 
@@ -87,7 +87,7 @@ public class TMd extends TM {
 		app.line(x, y, x + margin / 2, y + margin);
 		app.line(x + wid, y, x + wid - margin / 2 + 1, y + margin);
 
-		int columns = 11;
+		int columns = 35;
 		int rows = tape.length / columns;
 
 		float cs = Math.min((wid - margin * 2) / columns, (hei - margin) / rows);
@@ -119,34 +119,106 @@ public class TMd extends TM {
 		}
 	}
 
-	public void show(float x0, float y, float wid, float hei, int headspace, PApplet app) throws RuntimeError {
-		float cs = Math.min(wid / (headspace * 2), hei);
+	public void show(float x0, float y0, float wid, float hei, int headspace, PApplet app){		
+		float cs = Math.max(wid/MAX_CELLS, hei);
 
-		app.textAlign(PApplet.CENTER, PApplet.CENTER);
-		app.textSize(cs * 0.9f);
-
-		float x, offset = PApplet.lerp(tmpHead, this.head, tapeCounter);
-		float middle_x = x0 + wid / 2;
-
-		app.stroke(255);
-		for (int i = Math.min(0, this.head - headspace); i < Math.max(this.head + headspace, this.tape.length + 1); i++) {
-			x = middle_x + cs * (i - offset);
-
-			if (x < x0 || x >= x0 + wid)
-				continue;
-
-			app.fill(0);
-			app.rect(x, y, cs, cs);
+		int len = getTapeLength();
+		int head = getHead();
+		
+		int leftIndex, rightIndex;
+		if(head != prevHead) {
+			leftIndex = (prevHead < MAX_CELLS/2.0)? 0 : (int)Math.floor(head-MAX_CELLS/2.0);
+			rightIndex = (len-prevHead < MAX_CELLS/2.0)? len : (int)Math.ceil(head+MAX_CELLS/2.0);
+			
+			app.pushMatrix();
+			app.translate(PApplet.lerp(Math.signum(head-prevHead)*cs, 0, transition), 0);
+		}else {
+			leftIndex = (prevHead < MAX_CELLS/2.0)? 0 : (int)Math.floor(prevHead-MAX_CELLS/2.0);
+			rightIndex = (len-prevHead < MAX_CELLS/2.0)? len : (int)Math.ceil(prevHead+MAX_CELLS/2.0);
+		}
+		
+		float middlePoint = (x0+wid/2) - cs/2;
+		
+		app.textAlign(PApplet.CENTER, PApplet.BOTTOM);
+		for(int i = head, index = 0; i>=leftIndex; i--, index++) {
+			String val = getTape(i);
+			
+			if(val.equals("1")) {
+				app.fill(255, 0, 0, 50);
+			}else {
+				app.noFill();
+			}
+			
+			app.rect(middlePoint-index*cs, y0, cs, cs);
+			
 			app.fill(255);
-			app.text(getTape(i), x + cs / 2, y + cs * 0.4f);
+			app.text(val, middlePoint-index*cs + cs/2.0f, y0+cs/2);
+		}
+		
+		for(int i = head+1, index = 1; i<rightIndex; i++, index++) {
+			String val = getTape(i);
+			
+			if(val.equals("1")) {
+				app.fill(255, 0, 0, 50);
+			}else {
+				app.noFill();
+			}
+			
+			app.rect(middlePoint+index*cs, y0, cs, cs);
+			
+			app.fill(255);
+			app.text(val, middlePoint+index*cs + cs/2.0f, y0+cs/2);
 		}
 
-		if (tapeCounter == 1) {
-			tapeCounter = 0;
-			tmpHead = this.head;
-			changing = false;
-		} else if (changing) {
-			tapeCounter += 0.1;
+		if(head != prevHead) {
+			app.popMatrix();
 		}
+		
+		app.stroke(255);
+		app.strokeWeight(5);
+		app.noFill();
+		needle(x0+wid/2.0f, y0+hei*1.75f, cs, getState(), app);
+		app.strokeWeight(1);
+	}
+	
+	public void animateTape(float fps, PApplet app) throws RuntimeError {
+		if(head != prevHead) {
+			if(transition == 0) transition = 0.01f;
+			else transition += 50/(app.frameRate*fps);
+			
+			if(transition > 0.99) {
+				transition = 0;
+				prevHead = head;
+				prevInstruction = getCurrentInstruction();
+			}
+		}
+	}
+	
+	public boolean finishedTransition() {
+		return head == prevHead || transition > 0.99 ;
+	}
+	
+	public String getInstruction() throws RuntimeError {
+		if(!finishedTransition() || transition <= 0.5)
+			return prevInstruction;
+		else
+			return getCurrentInstruction();
+	}
+
+	void needle(float x, float y, float size, String state, PApplet app){
+		float xOffset = x-size/2;
+		float yOffset = y-size/2;
+		
+		app.beginShape();
+		app.vertex(size/2  + xOffset, -size/2   + yOffset);
+		app.vertex(size    + xOffset, size/3    + yOffset);
+		app.vertex(size    + xOffset, size      + yOffset);
+		app.vertex(0       + xOffset, size      + yOffset);
+		app.vertex(0       + xOffset, size/3    + yOffset);
+		app.endShape(PApplet.CLOSE);
+
+		app.fill(255);
+		app.textAlign(PApplet.CENTER, PApplet.CENTER);
+		app.text(state, size/2 + xOffset, size/2 + yOffset);
 	}
 }

@@ -8,6 +8,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Exceptions.RuntimeError;
+import Exceptions.SyntaxError;
 import Machines.TMd;
 import processing.core.PApplet;
 
@@ -29,7 +31,7 @@ public class MainWindow extends PApplet {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			System.err.println("Can't set look to \"WindowsLookAndFeel\", what a shame");
+			//System.err.println("Can't set look to \"WindowsLookAndFeel\", what a shame");
 		}
 		
 		if(program.isBlank()) {
@@ -63,10 +65,14 @@ public class MainWindow extends PApplet {
 
 		try {
 			turing = new TMd(Paths.get(program));
+		} catch (SyntaxError sE) {
+			System.err.println(sE);
+			System.exit(-1);
+			return;
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame, "\"" + program + "\" does not exist");
 			print(e);
-			exit();
+			System.exit(-2);
 			return;
 		}
 
@@ -85,60 +91,77 @@ public class MainWindow extends PApplet {
 			print(error);
 		}
 
-		textSize(60);
-		textAlign(LEFT, TOP);
-		fill(255);
-
-		if (state == -1)
-			text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
-		else
-			text(String.format("Output: %s", turing.output()), 50, 350);
+		try {
+			textSize(60);
+			textAlign(LEFT, TOP);
+			fill(255);
+	
+			if (state == -1)
+				text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
+			else
+				text(String.format("Output: %s", turing.output()), 50, 350);
+	
+			if (!pause && !finished) {
+				if(frameCount % fps == 0 && turing.finishedTransition())
+					doStep();
+				
+				turing.animateTape(fps, this);
+			}
 			
-		if (!pause && !finished && frameCount % fps == 0)
-			doStep();
-
-		fill(255);
-		textSize(60);
-		textAlign(LEFT, CENTER);
-		text(text, 50, height * 0.65f);
-		
-
-		fill(255);
-		textSize(20);
-		textAlign(RIGHT, BOTTOM);
-		text("FPS: " + nfc(frameRate/fps, 2), width-50, height-50);
+	
+			fill(255);
+			textSize(20);
+			textAlign(RIGHT, BOTTOM);
+			text("FPS: " + nfc(frameRate/fps, 2), width-50, height-50);
+			
+			noFill();
+			stroke(255);
+			turing.show(0, height/2, width, 50, 0, this);
+			
+			textSize(30);
+			textAlign(CENTER, TOP);
+			text(turing.getInstruction(), width/2, height/2+150);
+		} catch (RuntimeError e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void keyPressed() {
-		if(key == ' ') {
-			if (finished)
-				frameCount = -1;
-			else
-				pause = !pause;
-		}else if(keyCode == RIGHT) {
+		if(keyCode == RIGHT) {
 			doStep();
 		}else if(keyCode == ENTER) {
 			while(!finished)
 				doStep();
-		}else if(key == 'r') {
-			program = "";
-			frameCount = -1;
-		}else if(key == '-') {
-			fps +=1;
-		}else if(key == '+') {
-			fps = constrain(fps-5, 1, fps);
-		}else if(key == '=') {
-			fps = 10;
+		}else {
+			switch(key) {
+			case 'r':
+				program = "";
+				frameCount = -1;
+				break;
+			
+			case '-':
+				fps +=5;
+				break;
+			
+			case '+':
+				fps = constrain(fps-1, 1, fps);
+				break;
+				
+			case '=':
+				fps = 10;
+				break;
+			
+			case ' ':
+				if (finished)
+					frameCount = -1;
+				else
+					pause = !pause;
+				
+				break;
+			}
 		}
 	}
-
-	int sign(float n) {
-		if (n == 0)
-			return 0;
-
-		return round(abs(n) / n);
-	}
-
+	
 	private void doStep() {	
 		if (state <= 0)
 			finished = true;

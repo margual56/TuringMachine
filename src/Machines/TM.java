@@ -14,7 +14,7 @@ import Exceptions.SyntaxError;
  * Basic implementation of the Turing Machine. This is not graphical, it just
  * processes the tape, the states and the code.
  * 
- * @author Marcos Gutiérrez Alonso
+ * @author Marcos Gutiï¿½rrez Alonso
  * @version 2.0
  *
  */
@@ -210,8 +210,7 @@ public class TM {
 	/**
 	 * 
 	 * 
-	 * @param "R"
-	 *            or "L"
+	 * @param m "R" or "L"
 	 * @throws RuntimeError
 	 */
 	protected void move(String m) throws RuntimeError {
@@ -262,6 +261,18 @@ public class TM {
 		return toReturn;
 	}
 
+	public String getCurrentInstruction() throws RuntimeError {
+		String[] text = getInstruction(state, "" + getTape(head));
+		String out = "";
+		
+		out += "(";
+		for (int i = 0; i < text.length - 1; i++)
+			out += text[i] + ", ";
+		out += text[text.length - 1] + ")\n";
+		
+		return out;
+	}
+	
 	public String getTape() {
 		String t = "{";
 
@@ -276,7 +287,7 @@ public class TM {
 		return t + "};";
 	}
 
-	protected String getTape(int index) {
+	public String getTape(int index) {
 		// If out of bounds, return zero (the tape is technically infinite)
 		if (index < 0 || index >= tape.length)
 			return "0";
@@ -284,6 +295,14 @@ public class TM {
 		return Character.toString(tape[index]);
 	}
 
+	public int getTapeLength() {
+		return tape.length;
+	}
+	
+	public int getHead() {
+		return head;
+	}
+	
 	@Override
 	public String toString() {
 		String out = "";
@@ -315,6 +334,10 @@ public class TM {
 		return out;
 	}
 
+	public String getState() {
+		return state;
+	}
+	
 	public String output() {
 		//if (undefined)
 			//return ((char) 193) + "";
