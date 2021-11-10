@@ -3,7 +3,6 @@ package Machines;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import Exceptions.RuntimeError;
 import Exceptions.SyntaxError;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -17,22 +16,13 @@ import processing.core.PVector;
  * @version 1.0
  */
 public class TMd extends TM {
-	private float tapeCounter = 0;
-	private float tmpHead;
-	private boolean changing = false;
 	private PVector headPosition = new PVector(0, 0);
-	private float prevLeftIndex = -1, prevRightIndex = -1;
-
 	public TMd(Path code) throws SyntaxError, IOException {
 		super(code);
-
-		tmpHead = head;
 	}
 
 	public TMd(Path code, String initialState) throws SyntaxError, IOException {
 		super(code, initialState);
-
-		tmpHead = head;
 	}
 
 	@Override
@@ -52,8 +42,6 @@ public class TMd extends TM {
 
 				this.tape = newtape;
 			}
-
-			changing = true;
 		} else if (m.equals("L")) {
 			this.head--;
 
@@ -70,8 +58,6 @@ public class TMd extends TM {
 
 				this.head += 2;
 			}
-
-			changing = true;
 		}
 	}
 
@@ -90,7 +76,7 @@ public class TMd extends TM {
 		app.line(x, y, x + margin / 2, y + margin);
 		app.line(x + wid, y, x + wid - margin / 2 + 1, y + margin);
 
-		int columns = 11;
+		int columns = 35;
 		int rows = tape.length / columns;
 
 		float cs = Math.min((wid - margin * 2) / columns, (hei - margin) / rows);

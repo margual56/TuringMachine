@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Exceptions.RuntimeError;
 import Machines.TMd;
 import processing.core.PApplet;
 
@@ -111,6 +112,14 @@ public class MainWindow extends PApplet {
 		noFill();
 		stroke(255);
 		turing.show(0, height/2, width, 50, 0, this);
+		
+		try {
+			textSize(30);
+			textAlign(CENTER, TOP);
+			text(turing.getCurrentInstruction(), width/2, height/2+150);
+		} catch (RuntimeError e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void keyPressed() {

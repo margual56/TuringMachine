@@ -261,6 +261,18 @@ public class TM {
 		return toReturn;
 	}
 
+	public String getCurrentInstruction() throws RuntimeError {
+		String[] text = getInstruction(state, "" + getTape(head));
+		String out = "";
+		
+		out += "(";
+		for (int i = 0; i < text.length - 1; i++)
+			out += text[i] + ", ";
+		out += text[text.length - 1] + ")\n";
+		
+		return out;
+	}
+	
 	public String getTape() {
 		String t = "{";
 
