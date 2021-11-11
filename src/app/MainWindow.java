@@ -22,7 +22,7 @@ public class MainWindow extends PApplet {
 
 	TMd turing;
 	String text;
-	boolean pause = false, finished;
+	boolean pause = true, finished;
 	int state = 1;
 	int fps = 10;
 
@@ -123,13 +123,14 @@ public class MainWindow extends PApplet {
 			textAlign(CENTER, TOP);
 			text(turing.getInstruction(), width/2, height/2+150);
 		} catch (RuntimeError e) {
-			e.printStackTrace();
+			System.err.println(e);
 		}
 	}
 
 	public void keyPressed() {
 		if(keyCode == RIGHT) {
 			doStep();
+			turing.resetAnimation();
 		}else if(keyCode == ENTER) {
 			while(!finished)
 				doStep();
@@ -169,7 +170,6 @@ public class MainWindow extends PApplet {
 	
 		try {
 			state = turing.update();
-			text = turing.printTape();
 		} catch (Exception error) {
 			print(error);
 			finished = true;
@@ -182,6 +182,14 @@ public class MainWindow extends PApplet {
 			MainWindow mySketch = new MainWindow();
 			PApplet.runSketch(processingArgs, mySketch);
 		} else {
+			boolean verbose = false;
+			for(int i = 0; i<args.length; i++) {
+				if(args[i].compareToIgnoreCase("-v") == 0) {
+					verbose = true;
+					break;
+				}
+			}
+			
 			for(int i = 0; i<args.length; i++) {
 				if(args[i].compareToIgnoreCase("-h") == 0 || args[i].compareToIgnoreCase("--help") == 0) {
 					System.out.println(help());
@@ -196,7 +204,7 @@ public class MainWindow extends PApplet {
 					String file = args[i+1];
 					
 					try {
-						String result = headless(file);
+						String result = headless(file, verbose);
 						
 						System.out.println("Result: " + result);
 						
@@ -221,12 +229,19 @@ public class MainWindow extends PApplet {
 		}
 	}
 	
-	private static String headless(String file) throws SyntaxError, IOException, RuntimeError {
+	private static String headless(String file, boolean verbose) throws SyntaxError, IOException, RuntimeError {
 		TM machine = new TM(Paths.get(file));
+
+		if(verbose)
+			System.out.println(machine.getTape());
 		
 		int code = 1;
 		while(code != 0) {
+			
 			code = machine.update();
+
+			if(verbose)
+				System.out.println(machine.getTape());
 			
 			if(code == -1)
 				throw new RuntimeError("A Halt state was reached, but it wasn't a final state!");
@@ -244,7 +259,7 @@ public class MainWindow extends PApplet {
 				Optional arguments:
 					(none)			Run the program normally (GUI mode)
 					-h, --help		Show this help message and exit
-					--headless FILE		Run in headless mode (print the result and exit, no GUI)
+					--headless FILE	[-v]	Run in headless mode (print the result and exit, no GUI). Write `-v` to get the verbose output.
 					-e, --example		Print an example program and exit
 					
 				Note:
@@ -262,37 +277,18 @@ public class MainWindow extends PApplet {
 		return """
 				Printing the Example 1:
 					// a + b
-	
+
 					{q011111011};
 					
-					#define F = {f};
+					#define F = {q2};
 					
 					(q0, 1, 0, R, q1);
 					
 					(q1, 1, 1, R, q1);
-					(q1, 0, 0, R, q2);//1
+					(q1, 0, 0, R, q2);
 					
-					(q2, 0, 1, L, q3);
-					(q2, 1, 1, R, q2);
-					
-					(q3, 1, 1, L ,q4);
-					(q3, 0, 0, L ,q3);
-					
-					(q4, 1, 1, L, q4);
-					(q4, 0, 0, L, q5);//2
-					
-					(q5, 1, 1, L, q5);
-					(q5, 0, 0, R, q0);
-					
-					(q0, 0, 0, R, q6);//3
-					
-					(q6, 0, 0, R, q6);
-					(q6, 1, 0, R, q7);//4
-					
-					(q7, 1, 0, R, f);
-					
-					(f, 0, 0, H, f);
-					(f, 1, 1, H, f);
+					(q2, 1, 0, H, q2);
+					(q2, 0, 0, H, q2);
 				""";
 	}
 }

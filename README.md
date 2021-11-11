@@ -12,8 +12,8 @@ Usage: java -jar TuringMachine.jar [options]
 				
 Optional arguments:
 	(none)			Run the program normally (GUI mode)
-	-h, --help		Show this help message and exit
-	--headless FILE		Run in headless mode (print the result and exit, no GUI)
+	-h, --help			Show this help message and exit
+	--headless FILE [-v]	Run in headless mode (print the result and exit, no GUI). Write `-v` to get the verbose output.
 	-e, --example		Print an example program and exit
 					
 Note:

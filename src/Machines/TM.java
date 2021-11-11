@@ -276,7 +276,7 @@ public class TM {
 
 		for (int i = 0; i < tape.length; i++) {
 			if (i == head) {
-				t += state + tape[i];
+				t += "(" + state + ")" + tape[i];
 			} else {
 				t += tape[i] + "";
 			}

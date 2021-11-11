@@ -204,6 +204,11 @@ public class TMd extends TM {
 		else
 			return getCurrentInstruction();
 	}
+	
+	public void resetAnimation() {
+		prevHead = head;
+		transition = 1;
+	}
 
 	void needle(float x, float y, float size, String state, PApplet app){
 		float xOffset = x-size/2;
