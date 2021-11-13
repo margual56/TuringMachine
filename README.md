@@ -4,7 +4,9 @@ A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter mad
 ![](resources/turing.gif)<br/>
 _This is the [Example1.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) (which adds the two input numbers) running in real time_
 
-Download [the latest version](https://github.com/margual56/TuringMachine/releases)!
+### Downloads
+* Download [the latest version](https://github.com/margual56/TuringMachine/releases)!
+* Also, check out [the vs-code extension](https://marketplace.visualstudio.com/items?itemName=MarcosGutirrezAlonso.turing-machine) with syntax highlighting support, icons for the supported files and more.
 
 ## Using the Turing Machine in the CLI
 (From [version 3](https://github.com/margual56/TuringMachine/releases?q=v3) onwards)
