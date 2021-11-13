@@ -1,12 +1,20 @@
 package app;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Exceptions.RuntimeError;
@@ -17,6 +25,7 @@ import Machines.TMd;
 import processing.core.PApplet;
 
 public class MainWindow extends PApplet {
+	public static final int DEFAULT_FONT_SIZE = 12;
 	//The default Turing program to execute
 	String program = "";
 
@@ -25,9 +34,11 @@ public class MainWindow extends PApplet {
 	boolean pause = true, finished;
 	int state = 1;
 	int fps = 10;
+	
+	PButton helpButton;
 
 	public void settings() {
-		size(1200, 1000);
+		size(min(1200, displayWidth), min(1000, displayHeight));
 	}
 
 	public void setup() {
@@ -70,9 +81,14 @@ public class MainWindow extends PApplet {
 			turing = new TMd(Paths.get(program));
 		} catch (SyntaxError sE) {
 			System.err.println(sE);
+			JOptionPane.showMessageDialog(null, sE, "Syntax Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(-1);
 			return;
-		} catch (Exception e) {
+		} catch (RuntimeError rE) {
+			System.err.println(rE);
+			JOptionPane.showMessageDialog(null, rE, "Runtime Error", JOptionPane.ERROR_MESSAGE);
+			System.exit(-1);
+		} catch (IOException e) {
 			JOptionPane.showMessageDialog(frame, "\"" + program + "\" does not exist");
 			print(e);
 			System.exit(-2);
@@ -80,17 +96,52 @@ public class MainWindow extends PApplet {
 		}
 
 		text = turing.toString();
+		
+		helpButton = new PButton(50, height-50, "Show help", this, 
+				(mX, mY, app) -> {
+					JFrame frame = new JFrame("Test");
+	                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	                
+	                try {
+	                   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	                } catch (Exception e) {
+	                   e.printStackTrace();
+	                }
+	                
+	                JPanel panel = new JPanel();
+	                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+	                panel.setPreferredSize(new Dimension(640, 200));
+	                panel.setBackground(new Color(44, 44, 44));
+	                panel.setOpaque(true);
+	                
+	                JLabel text = new SmoothLabel(
+	                		"<html><p style='margin-top: 5'> spacebar &#8594; pause/resume (or restart if the execution has finished)</p><p style='margin-top: 5'> right arrow &#8594; Advance just one instruction forward</p><p style='margin-top: 5'> enter &#8594; Jump to the end of the execution</p><p style='margin-top: 5'> r &#8594; Stop, load a new program and run it</p><p style='margin-top: 5'> ESC &#8594; Exit cleanly</p><p style='margin-top: 5'> + &#8594; Increase speed</p><p style='margin-top: 5'> - &#8594; Decrease speed</p><p style='margin-top: 5'> = &#8594; Restore initial speed</p></html>");
+
+	                text.setBounds(150, 100, 640-150, 480);
+	                text.setBackground(new Color(44, 44, 44));
+	                text.setForeground(Color.WHITE);
+	                text.setFont(new Font("Consolas", Font.PLAIN, 14));
+	                text.setBorder(new EmptyBorder(0,50,0,0));//top,left,bottom,right
+	                panel.add(text);
+	                
+	                frame.getContentPane().add(panel);
+	                frame.setResizable(true);
+	                
+	                frame.pack();
+	                frame.setVisible(true);
+				}
+		);
+		helpButton.setBgColor(255);
+		helpButton.setFgColor(0);
+		helpButton.setFontSize(15, this);
+		helpButton.setY(height-helpButton.getHeight()-50);
 	}
 
 	public void draw() {
 		background(44);
 
-		try {
-			turing.showTapeSummary(50, 50, width - 100, 300, this);
-			// turing.show(50, 400, width-100, 300, 6);
-		} catch (Exception error) {
-			print(error);
-		}
+		turing.showTapeSummary(50, 50, width - 100, 300, this);
+		// turing.show(50, 400, width-100, 300, 6);
 
 		try {
 			textSize(60);
@@ -122,8 +173,15 @@ public class MainWindow extends PApplet {
 			textSize(30);
 			textAlign(CENTER, TOP);
 			text(turing.getInstruction(), width/2, height/2+150);
+			
+			if(helpButton.hovered(mouseX, mouseY))
+				helpButton.drawHovered(this);
+			else			
+				helpButton.draw(this);
+			
 		} catch (RuntimeError e) {
 			System.err.println(e);
+			JOptionPane.showMessageDialog(null, e, "Runtime Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -162,6 +220,11 @@ public class MainWindow extends PApplet {
 				break;
 			}
 		}
+	}
+	
+	public void mousePressed() {
+		if(helpButton.hovered(mouseX, mouseY))
+			helpButton.pressed(mouseX, mouseY, this);
 	}
 	
 	private void doStep() {	
