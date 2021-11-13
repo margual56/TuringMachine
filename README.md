@@ -6,7 +6,10 @@ _This is the [Example1.tm](https://github.com/margual56/TuringMachine/blob/f4225
 
 ### Downloads
 * Download [the latest version](https://github.com/margual56/TuringMachine/releases)!
-* Also, check out [the vs-code extension](https://marketplace.visualstudio.com/items?itemName=MarcosGutirrezAlonso.turing-machine) with syntax highlighting support, icons for the supported files and more.
+* Also, check out the extensions, which enable syntax highlighting, icons for the supported files and more:
+    * The [Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=MarcosGutirrezAlonso.turing-machine)
+    * The [Code-OSS extension](https://marketplace.visualstudio.com/items?itemName=MarcosGutirrezAlonso.turing-machine)
+    * The [repository of the extension](https://github.com/margual56/vscode-turing-machine)
 
 ## Using the Turing Machine in the CLI
 (From [version 3](https://github.com/margual56/TuringMachine/releases?q=v3) onwards)
