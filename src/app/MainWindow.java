@@ -6,17 +6,14 @@ import java.awt.Font;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -84,9 +81,14 @@ public class MainWindow extends PApplet {
 			turing = new TMd(Paths.get(program));
 		} catch (SyntaxError sE) {
 			System.err.println(sE);
+			JOptionPane.showMessageDialog(null, sE, "Syntax Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(-1);
 			return;
-		} catch (Exception e) {
+		} catch (RuntimeError rE) {
+			System.err.println(rE);
+			JOptionPane.showMessageDialog(null, rE, "Runtime Error", JOptionPane.ERROR_MESSAGE);
+			System.exit(-1);
+		} catch (IOException e) {
 			JOptionPane.showMessageDialog(frame, "\"" + program + "\" does not exist");
 			print(e);
 			System.exit(-2);
@@ -138,12 +140,8 @@ public class MainWindow extends PApplet {
 	public void draw() {
 		background(44);
 
-		try {
-			turing.showTapeSummary(50, 50, width - 100, 300, this);
-			// turing.show(50, 400, width-100, 300, 6);
-		} catch (Exception error) {
-			print(error);
-		}
+		turing.showTapeSummary(50, 50, width - 100, 300, this);
+		// turing.show(50, 400, width-100, 300, 6);
 
 		try {
 			textSize(60);
@@ -183,6 +181,7 @@ public class MainWindow extends PApplet {
 			
 		} catch (RuntimeError e) {
 			System.err.println(e);
+			JOptionPane.showMessageDialog(null, e, "Runtime Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

@@ -6,7 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 class SmoothLabel extends JLabel {
-    public SmoothLabel(String text) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -488310624992033567L;
+
+	public SmoothLabel(String text) {
         super(text);
     }
  

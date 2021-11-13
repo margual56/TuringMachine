@@ -68,6 +68,7 @@ public class TMd extends TM {
 				this.tape = newtape;
 
 				this.head += 2;
+				this.prevHead += 2;
 			}
 		}
 	}
