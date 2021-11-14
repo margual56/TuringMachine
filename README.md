@@ -2,7 +2,7 @@
 A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter made in Java using Processing libraries.
 
 ![](resources/turing.gif)<br/>
-_This is the [Example1.tm](https://github.com/margual56/TuringMachine/blob/f42250c67b4bccfd45451fed96c9bcbdbd805cdc/Examples/Example2.tm) (which adds the two input numbers) running in real time_
+_This is the [Example2.tm](https://github.com/margual56/TuringMachine/blob/654b77f2f1725ba0030eee0c7b79adbcd719491d/Examples/Example2.tm) (which duplicates the input) running in real time_
 
 ### Downloads
 * Download [the latest version](https://github.com/margual56/TuringMachine/releases)!
