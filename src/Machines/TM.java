@@ -150,6 +150,14 @@ public class TM {
 		state = state.replace("#defineF={", "").replace("}", "");
 
 		finalStates = state.split(",");
+		
+		
+		// If the final states are not explicitly defined, create them 
+		for(int i = 0; i<finalStates.length; i++)
+			if(!instructions.containsKey(finalStates[i])) {
+				instructions.put(finalStates[i] + "0", new String[] {finalStates[i], "0", "0", "H", finalStates[i]});
+				instructions.put(finalStates[i] + "1", new String[] {finalStates[i], "1", "1", "H", finalStates[i]});
+			}
 	}
 
 	/**
@@ -344,7 +352,7 @@ public class TM {
 
 		for (int i = 0; i < tape.length; i++) {
 			sum += tape[i] - '0';
-		}
+			}
 
 		return Integer.toString(sum);
 	}
