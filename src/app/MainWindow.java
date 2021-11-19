@@ -148,9 +148,9 @@ public class MainWindow extends PApplet {
 			textAlign(LEFT, TOP);
 			fill(255);
 	
-			if (state == -1)
+			/*if (state == -1)
 				text(String.format("Output: %s", ((char) 193) + ""), 50, 350);
-			else
+			else*/
 				text(String.format("Output: %s", turing.output()), 50, 350);
 	
 			if (!pause && !finished) {
