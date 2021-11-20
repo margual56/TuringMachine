@@ -1,3 +1,5 @@
+[![JUnit Report](https://github.com/margual56/TuringMachine/actions/workflows/junit.yml/badge.svg?branch=master)](https://github.com/margual56/TuringMachine/actions/workflows/junit.yml)
+
 # TuringMachine
 A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter made in Java using Processing libraries.
 
