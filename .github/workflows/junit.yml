@@ -17,11 +17,10 @@ jobs:
         
       - name: JUnit Report Action
         uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
         with:
           # JUnit xml report paths in glob format
-          report_paths: "junit/TESTS-TestSuites.xml"
+          report_paths: "junit/TEST-*.xml"
           # Fail if no tests are found
           require_tests: true
-          # Include passed tests in the report
-          include_passed: true # optional, default is false
 
