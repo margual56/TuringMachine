@@ -185,7 +185,7 @@ public class TMd extends TM {
 	public void animateTape(float fps, PApplet app) throws RuntimeError {
 		if(head != prevHead) {
 			if(transition == 0) transition = 0.01f;
-			else transition += 5/(app.frameRate+(fps-10)*2);
+			else transition += 6/(app.frameRate+fps/10);
 			
 			if(transition > 0.99) {
 				transition = 0;
