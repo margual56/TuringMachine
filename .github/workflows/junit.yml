@@ -18,7 +18,7 @@ jobs:
         uses: mikepenz/action-junit-report@v2.7.0
         with:
           # JUnit xml report paths in glob format
-          report_paths: "**/junit/*.xml"
+          report_paths: "junit/TEST-tests.ExpectedOutput.xml"
           # Include passed tests in the report
           include_passed: true # optional, default is false
 
