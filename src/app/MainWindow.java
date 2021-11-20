@@ -190,8 +190,8 @@ public class MainWindow extends PApplet {
 			doStep();
 			turing.resetAnimation();
 		}else if(keyCode == ENTER) {
-			while(!finished)
-				doStep();
+			end();
+			turing.resetAnimation();
 		}else {
 			switch(key) {
 			case 'r':
@@ -227,8 +227,35 @@ public class MainWindow extends PApplet {
 			helpButton.pressed(mouseX, mouseY, this);
 	}
 	
+	private void end(){
+		int execution_code = 1;
+		do {
+
+			try {
+				execution_code = turing.update();
+			}catch(Exception error) {
+				System.err.println(error);
+				
+				finished = true;
+				
+				return;
+			}
+			
+			if(execution_code == -1) {
+				System.err.println("A Halt state was reached, but it wasn't a final state!");
+				
+				finished = true;
+				
+				return;
+			}
+		}while(execution_code != 0);
+		
+		finished = true;
+		redraw();
+	}
+	
 	private void doStep() {	
-		if (state <= 0)
+		if (state == 0)
 			finished = true;
 	
 		try {
@@ -337,21 +364,20 @@ public class MainWindow extends PApplet {
 	}
 	
 	private static String example() {
-		return """
-				Printing the Example 1:
-					// a + b
+		return  """
+				// a + b
 
-					{q011111011};
-					
-					#define F = {q2};
-					
-					(q0, 1, 0, R, q1);
-					
-					(q1, 1, 1, R, q1);
-					(q1, 0, 0, R, q2);
-					
-					(q2, 1, 0, H, q2);
-					(q2, 0, 0, H, q2);
+				{q011111011}; // 4 + 1
+				
+				#define F = {q2};
+				
+				(q0, 1, 0, R, q1);
+				
+				(q1, 1, 1, R, q1);
+				(q1, 0, 0, R, q2);
+				
+				(q2, 1, 0, H, q2);
+				(q2, 0, 0, H, q2);
 				""";
 	}
 }
