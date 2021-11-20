@@ -54,34 +54,20 @@ Example:
 Comments can be written using `//`
 
 So a fully-working program would look like this (from [Example1.tm](https://github.com/margual56/TuringMachine/blob/8517c6134f74cfb1042d1a34e34811b2b86143bd/Examples/Example1.tm), it adds the two input numbers):
-```Td
-{q011101111};
+```
+// a + b
 
-#define F = {f};
+{q011111011};
+
+#define F = {q2};
 
 (q0, 1, 0, R, q1);
 
 (q1, 1, 1, R, q1);
-(q1, 0, 0, R, q2);//1
+(q1, 0, 0, R, q2);
 
-(q2, 0, 1, L, q3);
-(q2, 1, 1, R, q2);
-
-(q3, 1, 1, L ,q4);
-
-(q4, 1, 1, L, q4);
-(q4, 0, 0, L, q5);//2
-
-(q5, 1, 1, L, q5);
-(q5, 0, 0, R, q0);
-
-(q0, 0, 0, R, q6);//3
-
-(q6, 0, 0, R, q6);
-(q6, 1, 0, H, f);//4
-
-(f, 0, 0, H, f);
-(f, 1, 1, H, f);
+(q2, 1, 0, H, q2);
+(q2, 0, 0, H, q2);
 ```
 
 # Use the interpreter
