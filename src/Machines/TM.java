@@ -34,6 +34,10 @@ public class TM {
 
 		///////////////////////////////////// PROCESS CODE /////////////////////////////////////
 		interpret(lines);
+		
+		for(String str[]: instructions.values()) {
+			System.out.printf("[%s, %s, %s, %s, %s]\n", str[0], str[1], str[2], str[3], str[4]);
+		}
 	}
 
 	public TM(Path code) throws SyntaxError, IOException {
@@ -99,7 +103,7 @@ public class TM {
 			reads = s[1];
 			// Otherwise, add the equivalence (e.g.: "(q0, 1, 0, R, q1);" -> {"q01": ["q0", "1", "0", "R", "q1"]} )
 			// So, "q01" means "state q0 with input 1"
-			System.out.printf("instructions.put(%s + %s, [%s, %s, %s, %s, %s])\n", state, reads, s[0], s[1], s[2], s[3], s[4]);
+			//System.out.printf("instructions.put(%s + %s, [%s, %s, %s, %s, %s])\n", state, reads, s[0], s[1], s[2], s[3], s[4]);
 			instructions.put(state + reads, s);
 		}
 
@@ -116,8 +120,7 @@ public class TM {
 	private void setInitialState(String state) {
 		state = state.replace("{", "").replace("}", ""); // Remove the braces from the initial state line
 
-		////////////////////////////////// SET THE INITIAL STATE
-		////////////////////////////////// ///////////////////////////////////
+		////////////////////////////////// SET THE INITIAL STATE //////////////////////////////////
 		int i = 0;
 
 		// Move forward until the character is a letter.
@@ -187,7 +190,16 @@ public class TM {
 
 		// Set the tape value at the position of the head to the programmed value
 		this.tape[this.head] = current[2].charAt(0);
-
+		
+		if (current[3].equals("H")) { // If the new state is Halt
+			if (isFinal(this.state)) { // It might be final, so we can end the execution.
+				return 0; // With an exit code 0 (finished successfully)
+			} else { // If it is not a final state, returns the code -1
+				undefined = true;
+				return -1;
+			}
+		}
+		
 		// 3 -> 4th position -> (R | L) - > move the tape to the right or to the left
 		move(current[3]);
 
@@ -197,16 +209,8 @@ public class TM {
 		// This may throw a RuntimeError if the new state is not defined
 		current = getInstruction(this.state, getTape(this.head));
 
-		if (current[3].equals("H")) { // If the new state is Halt
-			if (isFinal(this.state)) { // It might be final, so we can end the execution.
-				return 0; // With an exit code 0 (finished successfully)
-			} else { // If it is not a final state, returns the code -1
-				undefined = true;
-				return -1;
-			}
-		} else {
-			return 1; // Normal execution returns 1
-		}
+		
+		return 1; // Normal execution returns 1
 	}
 
 	/**
