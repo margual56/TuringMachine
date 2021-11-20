@@ -34,10 +34,6 @@ public class TM {
 
 		///////////////////////////////////// PROCESS CODE /////////////////////////////////////
 		interpret(lines);
-		
-		for(String str[]: instructions.values()) {
-			System.out.printf("[%s, %s, %s, %s, %s]\n", str[0], str[1], str[2], str[3], str[4]);
-		}
 	}
 
 	public TM(Path code) throws SyntaxError, IOException {
