@@ -182,6 +182,8 @@ public class MainWindow extends PApplet {
 		} catch (RuntimeError e) {
 			System.err.println(e);
 			JOptionPane.showMessageDialog(null, e, "Runtime Error", JOptionPane.ERROR_MESSAGE);
+			
+			System.exit(-1);
 		}
 	}
 
