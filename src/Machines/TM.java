@@ -191,18 +191,18 @@ public class TM {
 		// Set the tape value at the position of the head to the programmed value
 		this.tape[this.head] = current[2].charAt(0);
 		
-		if (current[3].equals("H")) { // If the new state is Halt
-			if (isFinal(this.state)) { // It might be final, so we can end the execution.
+		if (current[3].equals("H")) {
+			if(isFinal(this.state)) // We can end the execution.
 				return 0; // With an exit code 0 (finished successfully)
-			} else { // If it is not a final state, returns the code -1
+			else if(current[0].equals(current[4])) {
 				undefined = true;
-				return -1;
+				return -1; // Final state not defined
 			}
 		}
 		
 		// 3 -> 4th position -> (R | L) - > move the tape to the right or to the left
 		move(current[3]);
-
+		
 		// Then, we assign the new state to the corresponding one
 		this.state = current[4];
 
