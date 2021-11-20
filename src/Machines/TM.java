@@ -28,29 +28,23 @@ public class TM {
 
 	public TM(String code) throws SyntaxError, IOException {
 
-		/////////////////////////////////////// READ CODE
-		/////////////////////////////////////// ///////////////////////////////////////////////
-
+		/////////////////////////////////////// READ CODE ///////////////////////////////////////
 		String lines[];
 		lines = code.split("\n");
 
-		///////////////////////////////////// PROCESS CODE
-		///////////////////////////////////// //////////////////////////////////////////////
+		///////////////////////////////////// PROCESS CODE /////////////////////////////////////
 		interpret(lines);
 	}
 
 	public TM(Path code) throws SyntaxError, IOException {
 
-		/////////////////////////////////////// READ CODE
-		/////////////////////////////////////// ///////////////////////////////////////////////
-
+		/////////////////////////////////////// READ CODE ///////////////////////////////////////
 		String lines[];
 
 		Charset charset = StandardCharsets.UTF_8;
 		lines = Files.readAllLines(code, charset).toArray(new String[0]);
 
-		///////////////////////////////////// PROCESS CODE
-		///////////////////////////////////// //////////////////////////////////////////////
+		///////////////////////////////////// PROCESS CODE ///////////////////////////////////// 
 		interpret(lines);
 	}
 
@@ -103,9 +97,9 @@ public class TM {
 
 			state = s[0];
 			reads = s[1];
-			// Otherwise, add the equivalence (e.g.: "(q0, 1, 0, R, q1);" -> {"q01": ["q0",
-			// "1", "0", "R", "q1"]} )
+			// Otherwise, add the equivalence (e.g.: "(q0, 1, 0, R, q1);" -> {"q01": ["q0", "1", "0", "R", "q1"]} )
 			// So, "q01" means "state q0 with input 1"
+			System.out.printf("instructions.put(%s + %s, [%s, %s, %s, %s, %s])\n", state, reads, s[0], s[1], s[2], s[3], s[4]);
 			instructions.put(state + reads, s);
 		}
 
@@ -169,10 +163,10 @@ public class TM {
 
 		// If the final states are not explicitly defined, create them
 		for (int i = 0; i < finalStates.length; i++)
-			if (!instructions.containsKey(finalStates[i])) {
+			if (!instructions.containsKey(finalStates[i]+"0"))
 				instructions.put(finalStates[i] + "0", new String[] { finalStates[i], "0", "0", "H", finalStates[i] });
+			else if(!instructions.containsKey(finalStates[i]+"1"))
 				instructions.put(finalStates[i] + "1", new String[] { finalStates[i], "1", "1", "H", finalStates[i] });
-			}
 	}
 
 	/**
