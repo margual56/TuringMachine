@@ -263,8 +263,8 @@ public class TM {
 
 				this.head += 2;
 			}
-		} else {
-			throw new RuntimeError("\"" + m + "\" is not a valid movement of the tape. Please, use \"R\" or \"L\"");
+		} else if(!m.equals("H")) {
+			throw new RuntimeError("\"" + m + "\" is not a valid movement of the tape. Please, use \"R\", \"L\" or \"H\"");
 		}
 	}
 
