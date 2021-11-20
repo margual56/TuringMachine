@@ -1,0 +1,24 @@
+name: JUnit Report
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: JUnit Report Action
+        # You may pin to the exact commit or the version.
+        # uses: mikepenz/action-junit-report@0972ee4b9952b671d6acc87c228fd7e85fa83e06
+        uses: mikepenz/action-junit-report@v2.7.0
+        with:
+          # JUnit xml report paths in glob format
+          report_paths: "**/junit/*.xml"
+          # Include passed tests in the report
+          include_passed: true # optional, default is false
+
