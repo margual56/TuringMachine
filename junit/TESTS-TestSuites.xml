@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="marcos-LAPTOP" id="0" name="ExpectedOutput" package="tests" skipped="0" tests="5" time="0.089" timestamp="2021-11-21T12:50:19">
+  <testsuite errors="0" failures="0" hostname="marcos-LAPTOP" id="0" name="ExpectedOutput" package="tests" skipped="0" tests="5" time="0.073" timestamp="2021-11-21T13:30:47">
       <properties>
           <property name="env.KDE_SESSION_VERSION" value="5" />
 
@@ -26,7 +26,7 @@
 
           <property name="sun.boot.library.path" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre/lib" />
 
-          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.ExpectedOutput skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.ExpectedOutput.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher13810006799629982861.properties propsfile=/home/marcos/Projects/TuringMachine/junit5541232256427333466.properties" />
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.ExpectedOutput skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.ExpectedOutput.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher10987688328242316283.properties propsfile=/home/marcos/Projects/TuringMachine/junit12241147334617567215.properties" />
 
           <property name="jdk.debug" value="release" />
 
@@ -268,13 +268,13 @@
 
       <testcase classname="tests.ExpectedOutput" name="Example1" time="0.002" />
 
-      <testcase classname="tests.ExpectedOutput" name="Example2" time="0.001" />
+      <testcase classname="tests.ExpectedOutput" name="Example2" time="0.0" />
 
       <testcase classname="tests.ExpectedOutput" name="Example3" time="0.001" />
 
-      <testcase classname="tests.ExpectedOutput" name="Example4" time="0.0" />
+      <testcase classname="tests.ExpectedOutput" name="Example4" time="0.001" />
 
-      <testcase classname="tests.ExpectedOutput" name="Example5" time="0.001" />
+      <testcase classname="tests.ExpectedOutput" name="Example5" time="0.0" />
 
       <system-out><![CDATA[]]></system-out>
 
