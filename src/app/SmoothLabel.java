@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+/**
+ * @author marcos
+ *
+ * Renders the text with antialiasing
+ */
 class SmoothLabel extends JLabel {
     /**
 	 * 
@@ -15,6 +20,9 @@ class SmoothLabel extends JLabel {
         super(text);
     }
  
+    /**
+     * Render the text with antialiasing
+     */
     @Override
     protected void paintComponent(Graphics g) {
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
