@@ -7,11 +7,26 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * @author marcos
+ * 
+ *	Custom File Chooser. It restricts the choice to Turing machine files (tm) 
+ *	and tries to set the Windows look and feel
+ */
 @SuppressWarnings("serial")
 public class FileChooser extends JFileChooser {
+	/**
+	 * Calls the other constructor with the working directory as the path.
+	 */
 	public FileChooser() {
 		this(workingDirectory());
 	}
+	/**
+	 * Default constructor. Takes the path, tries to set the look and feel 
+	 * and the window title
+	 * 
+	 * @param path Default path to show
+	 */
 	public FileChooser(String path) {
 		super(path);
 		
@@ -29,6 +44,9 @@ public class FileChooser extends JFileChooser {
 		}
 	}
 	
+	/**
+	 * @return The current working directory
+	 */
 	public static String workingDirectory() {
 		return Paths.get("").toAbsolutePath().toString();
 	}

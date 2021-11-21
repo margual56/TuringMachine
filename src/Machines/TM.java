@@ -19,13 +19,41 @@ import Exceptions.SyntaxError;
  *
  */
 public class TM {
-	protected HashMap<String, String[]> instructions; // Stores the instructions for a given state
-	protected String finalStates[]; // Stores the final states of the code
-	protected int head = 0; // Point of execution
-	protected String state = ""; // Current state of the machine
-	protected char tape[]; // Stores all the information on the tape
+	/**
+	 * Stores the instructions for a given state
+	 */
+	protected HashMap<String, String[]> instructions;
+	
+	
+	/**
+	 * Stores the final states of the code
+	 */
+	protected String finalStates[];
+	
+	
+	/**
+	 * Point of execution
+	 */
+	protected int head = 0; 
+	
+	
+	/**
+	 * Current state of the machine
+	 */
+	protected String state = "";
+	
+	
+	/**
+	 * Stores all the information on the tape
+	 */
+	protected char tape[];
 	protected boolean undefined = false;
 
+	/**
+	 * @param code A string containing all the code
+	 * @throws SyntaxError If code is wrong
+	 * @throws IOException If file cannot be read
+	 */
 	public TM(String code) throws SyntaxError, IOException {
 
 		/////////////////////////////////////// READ CODE ///////////////////////////////////////
@@ -36,6 +64,13 @@ public class TM {
 		interpret(lines);
 	}
 
+	/**
+	 * Default constructor
+	 * 
+	 * @param code File containing the code
+	 * @throws SyntaxError If code is wrong
+	 * @throws IOException If file cannot be read
+	 */
 	public TM(Path code) throws SyntaxError, IOException {
 
 		/////////////////////////////////////// READ CODE ///////////////////////////////////////
@@ -48,12 +83,26 @@ public class TM {
 		interpret(lines);
 	}
 
+	/**
+	 * Constructor that overrides the initial state
+	 * 
+	 * @param code File containing the code
+	 * @param initialState New initial state
+	 * @throws SyntaxError If code is wrong
+	 * @throws IOException If file cannot be read
+	 */
 	public TM(Path code, String initialState) throws SyntaxError, IOException {
 		this(code);
 
 		setInitialState(initialState); // Override the initial state to the one given as argument
 	}
 
+	/**
+	 * Interpreter for the TM code.
+	 * 
+	 * @param lines An array with the lines of the code
+	 * @throws SyntaxError If code is wrong
+	 */
 	private void interpret(String lines[]) throws SyntaxError {
 		String mycode = "";
 		instructions = new HashMap<String, String[]>();
@@ -111,7 +160,7 @@ public class TM {
 	 * Sets the initial state and the initial values of the tape for the Turing
 	 * Machine.
 	 * 
-	 * @param Line containing the initial state of the tape
+	 * @param state Line containing the initial state of the tape
 	 */
 	private void setInitialState(String state) {
 		state = state.replace("{", "").replace("}", ""); // Remove the braces from the initial state line
@@ -151,9 +200,10 @@ public class TM {
 	}
 
 	/**
-	 * Generates a list with the final states
+	 * Generates a list with the final states and adds explicit definitions 
+	 * for the final states that do not appear in the code.
 	 * 
-	 * @param Line containing the final states
+	 * @param state Line containing the final states
 	 */
 	private void setFinalStates(String state) {
 		state = state.replace("#defineF={", "").replace("}", "");
@@ -175,7 +225,7 @@ public class TM {
 	 * the head, etc).
 	 * 
 	 * @return execution return code
-	 * @throws RuntimeError
+	 * @throws RuntimeError When an error is reached on runtime
 	 */
 	public int update() throws RuntimeError {
 		String[] current;
@@ -212,7 +262,7 @@ public class TM {
 	}
 
 	/**
-	 * @param state to be evaluated
+	 * @param s State to be evaluated
 	 * @return true if the given state is final
 	 */
 	private boolean isFinal(String s) {
@@ -225,9 +275,8 @@ public class TM {
 
 	/**
 	 * 
-	 * 
-	 * @param m "R" or "L"
-	 * @throws RuntimeError
+	 * @param m "R", "L" or "H"
+	 * @throws RuntimeError When the execution gives an error
 	 */
 	protected void move(String m) throws RuntimeError {
 		if (m.equals("R")) {
@@ -266,6 +315,12 @@ public class TM {
 		}
 	}
 
+	/**
+	 * @param s State
+	 * @param v Value (pointed by the head)
+	 * @return The definition of the instruction
+	 * @throws RuntimeError When the execution gives an error
+	 */
 	private String[] getInstruction(String s, String v) throws RuntimeError {
 		String[] toReturn = (String[]) instructions.get(s + v);
 
@@ -275,6 +330,12 @@ public class TM {
 		return toReturn;
 	}
 
+	/**
+	 * Takes the current state and the current value pointed by the head
+	 * 
+	 * @return The instruction that is going to be executed next
+	 * @throws RuntimeError When the execution gives an error
+	 */
 	public String getCurrentInstruction() throws RuntimeError {
 		String[] text = getInstruction(state, "" + getTape(head));
 		String out = "";
@@ -287,6 +348,9 @@ public class TM {
 		return out;
 	}
 
+	/**
+	 * @return A representation of the tape, with the head state and all
+	 */
 	public String getTape() {
 		String t = "{";
 
@@ -301,6 +365,10 @@ public class TM {
 		return t + "};";
 	}
 
+	/**
+	 * @param index Index of the tape
+	 * @return Value of the tape at the given index
+	 */
 	public String getTape(int index) {
 		// If out of bounds, return zero (the tape is technically infinite)
 		if (index < 0 || index >= tape.length)
@@ -309,14 +377,23 @@ public class TM {
 		return Character.toString(tape[index]);
 	}
 
+	/**
+	 * @return The length of the tape
+	 */
 	public int getTapeLength() {
 		return tape.length;
 	}
 
+	/**
+	 * @return Current position of the head
+	 */
 	public int getHead() {
 		return head;
 	}
 
+	/**
+	 * Same as {@link #printTape()} but in the {@link Object#toString()} function
+	 */
 	@Override
 	public String toString() {
 		String out = "";
@@ -348,10 +425,16 @@ public class TM {
 		return out;
 	}
 
+	/**
+	 * @return The current state
+	 */
 	public String getState() {
 		return state;
 	}
 
+	/**
+	 * @return Value of the tape (addition of all the 1's)
+	 */
 	public String output() {
 		// if (undefined)
 		// return ((char) 193) + "";
@@ -366,16 +449,16 @@ public class TM {
 	}
 
 	/**
+	 * The "^" character represents the position of the head, but it does
+	 * not always align correctly: it depends on the font size and other
+	 * variables.
+	 *           
 	 * @return Turing Machine's tape (as a String of zeroes and ones)
-	 * @implNote The "^" character represents the position of the head, but it does
-	 *           not always align correctly: it depends on the font size and other
-	 *           variables.
 	 */
 	public String printTape() {
 		String out = "";
 
-		//////////////////////////////////////////// TAPE VALUES
-		//////////////////////////////////////////// ////////////////////////////////////////////
+		//////////////////////////////////////////// TAPE VALUES ////////////////////////////////////////////
 
 		for (int i = 0; i < tape.length - 1; i++) {
 			// We don't want to use the function {@link #getTape(int)} here,
@@ -390,16 +473,14 @@ public class TM {
 		// EOL
 		out += tape[tape.length - 1] + "\n";
 
-		//////////////////////////////////////////// TAPE HEAD
-		//////////////////////////////////////////// /////////////////////////////////////////////
+		//////////////////////////////////////////// TAPE HEAD /////////////////////////////////////////////
 
 		for (int i = 0; i < head * 3; i++)
 			out += " ";
 
 		out += "^\n";
 
-		//////////////////////////////////////////// TAPE STATE
-		//////////////////////////////////////////// ////////////////////////////////////////////
+		//////////////////////////////////////////// TAPE STATE ////////////////////////////////////////////
 
 		String s[];
 

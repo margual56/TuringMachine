@@ -77,7 +77,7 @@ public class MainWindow extends PApplet {
 		helpButton.setBgColor(255);
 		helpButton.setFgColor(0);
 		helpButton.setFontSize(15, this);
-		helpButton.setY(height-helpButton.getHeight()-50);
+		helpButton.setPosition(50, height-helpButton.getHeight()-50);
 	}
 
 	public void draw() {

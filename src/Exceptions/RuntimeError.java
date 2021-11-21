@@ -2,6 +2,11 @@ package Exceptions;
 
 import javax.swing.JOptionPane;
 
+/**
+ * @author marcos
+ *
+ * A custom error. Shows an Error window pane.
+ */
 @SuppressWarnings("serial")
 public class RuntimeError extends Exception {
 	String str = "";

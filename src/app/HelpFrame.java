@@ -10,18 +10,29 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @author marcos
+ *
+ * A window containing the help for the Turing Machine 
+ */
 public class HelpFrame extends JFrame {
 	/**
-	 * 
+	 * Serial version
 	 */
 	private static final long serialVersionUID = 5546626617527424902L;
 
 	private JPanel panel;
+	/**
+	 * Label containing the {@link #list}
+	 */
 	private SmoothLabel label;
 	
+	/**
+	 * HTML code containing the list of shortcuts
+	 */
 	private static String list = """
 			<html>
-				<p style='margin-top: 5'>spacebar &#8594; pause/resume (or restart if the execution has finished)</p>
+				<p style='margin-top: 5'> spacebar &#8594; pause/resume (or restart if the execution has finished)</p>
 				<p style='margin-top: 5'> right arrow &#8594; Advance just one instruction forward</p>
 				<p style='margin-top: 5'> enter &#8594; Jump to the end of the execution</p>
 				<p style='margin-top: 5'> r &#8594; Stop, load a new program and run it</p>
@@ -32,6 +43,11 @@ public class HelpFrame extends JFrame {
 			</html>
 			""";
 	
+	/**
+	 * Default constructor. Adds the {@link #panel} and configures the window.
+	 * 
+	 * @param title Title of the window
+	 */
 	public HelpFrame(String title) {
 		super(title);
 
@@ -64,10 +80,16 @@ public class HelpFrame extends JFrame {
         pack();
 	}
 	
+	/**
+	 * @return The {@link #list}
+	 */
 	public static String getText() {
 		return list;
 	}
 	
+	/**
+	 * @param text New text for the {@link #list} and the {@link #label}
+	 */
 	public void setText(String text) {
 		list = text;
 		label.setText(text);
