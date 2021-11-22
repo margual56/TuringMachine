@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="marcos-DESKTOP" name="tests.Example2" skipped="0" tests="2" time="0.055" timestamp="2021-11-22T22:22:50">
+<testsuite errors="0" failures="0" hostname="marcos-DESKTOP" name="tests.Example2" skipped="0" tests="2" time="0.054" timestamp="2021-11-22T22:26:29">
   <properties>
     <property name="env.KDE_SESSION_VERSION" value="5" />
     <property name="ant.library.dir" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib" />
@@ -13,11 +13,11 @@
     <property name="java.vendor.url" value="https://java.oracle.com/" />
     <property name="env.GST_PLUGIN_SYSTEM_PATH" value="/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0" />
     <property name="sun.boot.library.path" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre/lib" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.Example2 skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.Example2.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher12484423257885591877.properties propsfile=/home/marcos/Projects/TuringMachine/junit3499442013745309794.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.Example2 skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.Example2.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher17011189476683958561.properties propsfile=/home/marcos/Projects/TuringMachine/junit337869046807778820.properties" />
     <property name="env.FLATPAK_SANDBOX_DIR" value="/home/marcos/.var/app/org.eclipse.Java/sandbox" />
     <property name="jdk.debug" value="release" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
-    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="/tmp/null957491156" />
+    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="/tmp/null701095146" />
     <property name="java.version.date" value="2021-07-20" />
     <property name="java.home" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre" />
     <property name="env.GDK_CORE_DEVICE_EVENTS" value="1" />

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="marcos-DESKTOP" name="tests.Example3" skipped="0" tests="4" time="0.06" timestamp="2021-11-22T22:22:51">
+<testsuite errors="0" failures="0" hostname="marcos-DESKTOP" name="tests.Example3" skipped="0" tests="4" time="0.063" timestamp="2021-11-22T22:26:29">
   <properties>
     <property name="env.KDE_SESSION_VERSION" value="5" />
     <property name="ant.library.dir" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib" />
@@ -13,11 +13,11 @@
     <property name="java.vendor.url" value="https://java.oracle.com/" />
     <property name="env.GST_PLUGIN_SYSTEM_PATH" value="/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0" />
     <property name="sun.boot.library.path" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre/lib" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.Example3 skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.Example3.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher15886294639557127863.properties propsfile=/home/marcos/Projects/TuringMachine/junit2588363703658876510.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.Example3 skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.Example3.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher14552635864867346637.properties propsfile=/home/marcos/Projects/TuringMachine/junit8530448420275998131.properties" />
     <property name="env.FLATPAK_SANDBOX_DIR" value="/home/marcos/.var/app/org.eclipse.Java/sandbox" />
     <property name="jdk.debug" value="release" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
-    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="/tmp/null957491156" />
+    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="/tmp/null701095146" />
     <property name="java.version.date" value="2021-07-20" />
     <property name="java.home" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre" />
     <property name="env.GDK_CORE_DEVICE_EVENTS" value="1" />
@@ -135,10 +135,10 @@
     <property name="env.QT_AUTO_SCREEN_SCALE_FACTOR" value="0" />
     <property name="ant.project.default-target" value="build" />
   </properties>
-  <testcase classname="tests.Example3" name="test[0: state{0q0111110111100}; =&gt; 1]" time="0.002" />
-  <testcase classname="tests.Example3" name="test[1: state{0q0110111100}; =&gt; 0]" time="0.0" />
-  <testcase classname="tests.Example3" name="test[2: state{0q0101111}; =&gt; 0]" time="0.001" />
-  <testcase classname="tests.Example3" name="test[3: state{0q011110100}; =&gt; 3]" time="0.0" />
+  <testcase classname="tests.Example3" name="test[0: state{0q0111110111100}; =&gt; 1]" time="0.003" />
+  <testcase classname="tests.Example3" name="test[1: state{0q0110111100}; =&gt; 0]" time="0.001" />
+  <testcase classname="tests.Example3" name="test[2: state{0q0101111}; =&gt; 0]" time="0.0" />
+  <testcase classname="tests.Example3" name="test[3: state{0q011110100}; =&gt; 3]" time="0.001" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
