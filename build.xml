@@ -35,7 +35,22 @@
         <pathelement location="libs/core.jar"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
-    <path id="run.ExpectedOutput.classpath">
+    <path id="run.Example1.classpath">
+        <path refid="TuringMachine.classpath"/>
+        <pathelement location="libs/core.jar"/>
+        <path refid="JUnit 5.libraryclasspath"/>
+    </path>
+    <path id="run.Example2.classpath">
+        <path refid="TuringMachine.classpath"/>
+        <pathelement location="libs/core.jar"/>
+        <path refid="JUnit 5.libraryclasspath"/>
+    </path>
+    <path id="run.Example3.classpath">
+        <path refid="TuringMachine.classpath"/>
+        <pathelement location="libs/core.jar"/>
+        <path refid="JUnit 5.libraryclasspath"/>
+    </path>
+    <path id="run.Example4.classpath">
         <path refid="TuringMachine.classpath"/>
         <pathelement location="libs/core.jar"/>
         <path refid="JUnit 5.libraryclasspath"/>
@@ -81,13 +96,40 @@
             <classpath refid="run.MainWindow.classpath"/>
         </java>
     </target>
-    <target name="ExpectedOutput">
+    <target name="Example1">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="tests.ExpectedOutput" todir="${junit.output.dir}"/>
+            <test name="tests.Example1" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="run.ExpectedOutput.classpath"/>
+            <classpath refid="run.Example1.classpath"/>
+        </junit>
+    </target>
+    <target name="Example2">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.Example2" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="run.Example2.classpath"/>
+        </junit>
+    </target>
+    <target name="Example3">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.Example3" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="run.Example3.classpath"/>
+        </junit>
+    </target>
+    <target name="Example4">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.Example4" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="run.Example4.classpath"/>
         </junit>
     </target>
     <target name="junitreport">

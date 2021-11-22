@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="marcos-DESKTOP" name="tests.Example3" skipped="0" tests="4" time="0.06" timestamp="2021-11-22T22:22:51">
+  <properties>
+    <property name="env.KDE_SESSION_VERSION" value="5" />
+    <property name="ant.library.dir" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib" />
+    <property name="java.specification.version" value="16" />
+    <property name="ant.project.name" value="TuringMachine" />
+    <property name="env.GTK_RC_FILES" value="/etc/gtk/gtkrc:/home/marcos/.gtkrc:/home/marcos/.config/gtkrc" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="debuglevel" value="source,lines,vars" />
+    <property name="env.PS1" value="[ $FLATPAK_ID \W]\$ " />
+    <property name="java.vendor.url" value="https://java.oracle.com/" />
+    <property name="env.GST_PLUGIN_SYSTEM_PATH" value="/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0" />
+    <property name="sun.boot.library.path" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre/lib" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner tests.Example3 skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/home/marcos/Projects/TuringMachine/junit/TEST-tests.Example3.xml crashfile=/home/marcos/Projects/TuringMachine/junitvmwatcher15886294639557127863.properties propsfile=/home/marcos/Projects/TuringMachine/junit2588363703658876510.properties" />
+    <property name="env.FLATPAK_SANDBOX_DIR" value="/home/marcos/.var/app/org.eclipse.Java/sandbox" />
+    <property name="jdk.debug" value="release" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="org.apache.tools.ant.taskdefs.optional.junit.AggregateTransformer0" value="/tmp/null957491156" />
+    <property name="java.version.date" value="2021-07-20" />
+    <property name="java.home" value="/app/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.2.v20210721-1149/jre" />
+    <property name="env.GDK_CORE_DEVICE_EVENTS" value="1" />
+    <property name="basedir" value="/home/marcos/Projects/TuringMachine" />
+    <property name="file.separator" value="/" />
+    <property name="java.vm.compressedOopsMode" value="Zero based" />
+    <property name="env.QT_LINUX_ACCESSIBILITY_ALWAYS_ON" value="1" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="env.LC_TELEPHONE" value="es_ES.UTF-8" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="env.XDG_SESSION_PATH" value="/org/freedesktop/DisplayManager/Session0" />
+    <property name="java.runtime.version" value="16.0.2+7-67" />
+    <property name="env.XDG_CONFIG_HOME" value="/home/marcos/.var/app/org.eclipse.Java/config" />
+    <property name="user.name" value="marcos" />
+    <property name="env.PATH" value="/app/bin:/usr/bin" />
+    <property name="env.LC_TIME" value="es_ES.UTF-8" />
+    <property name="env.LOGNAME" value="marcos" />
+    <property name="env.XDG_SEAT" value="seat0" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="env.LC_IDENTIFICATION" value="es_ES.UTF-8" />
+    <property name="env.LC_NUMERIC" value="es_ES.UTF-8" />
+    <property name="env.XDG_VTNR" value="1" />
+    <property name="env._" value="/usr/bin/startplasma-x11" />
+    <property name="env.XDG_SESSION_DESKTOP" value="KDE" />
+    <property name="env.SHLVL" value="0" />
+    <property name="env.XCURSOR_THEME" value="Breeze_Snow" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="env.XCURSOR_SIZE" value="24" />
+    <property name="env.ALSA_CONFIG_PATH" value="/usr/share/alsa/alsa-flatpak.conf" />
+    <property name="java.version" value="16.0.2" />
+    <property name="env.XDG_CACHE_HOME" value="/home/marcos/.var/app/org.eclipse.Java/cache" />
+    <property name="env.XDG_RUNTIME_DIR" value="/run/user/1000" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="env.XDG_DATA_HOME" value="/home/marcos/.var/app/org.eclipse.Java/data" />
+    <property name="ant.home" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445" />
+    <property name="junit.output.dir" value="junit" />
+    <property name="env.KDE_FULL_SESSION" value="true" />
+    <property name="env.MOTD_SHOWN" value="pam" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.10.11 compiled on July 10 2021" />
+    <property name="java.library.path" value=":/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib" />
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="env.XDG_SESSION_TYPE" value="x11" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="env.FLATPAK_ID" value="org.eclipse.Java" />
+    <property name="env.XDG_SESSION_CLASS" value="user" />
+    <property name="env.XAUTHORITY" value="/run/flatpak/Xauthority" />
+    <property name="env.OLDPWD" value="/home/marcos" />
+    <property name="env.LC_MEASUREMENT" value="es_ES.UTF-8" />
+    <property name="ant.file.TuringMachine" value="/home/marcos/Projects/TuringMachine/build.xml" />
+    <property name="env.PWD" value="/home/marcos" />
+    <property name="env.SESSION_MANAGER" value="local/marcos-DESKTOP:@/tmp/.ICE-unix/1267,unix/marcos-DESKTOP:/tmp/.ICE-unix/1267" />
+    <property name="env.LANG" value="en_US.UTF-8" />
+    <property name="env.LC_NAME" value="es_ES.UTF-8" />
+    <property name="env.AT_SPI_BUS_ADDRESS" value="unix:path=/run/flatpak/at-spi-bus" />
+    <property name="env.OXYGEN_DISABLE_INNER_SHADOWS_HACK" value="1" />
+    <property name="java.class.path" value="/home/marcos/Projects/TuringMachine/bin:/home/marcos/Projects/TuringMachine/libs/core.jar:/app/eclipse/plugins/org.junit.jupiter.api_5.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.jupiter.engine_5.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.jupiter.migrationsupport_5.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.jupiter.params_5.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.platform.commons_1.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.platform.engine_1.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.platform.launcher_1.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.platform.runner_1.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.platform.suite.api_1.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.junit.vintage.engine_5.7.1.v20210222-1948.jar:/app/eclipse/plugins/org.opentest4j_1.2.0.v20190826-0900.jar:/app/eclipse/plugins/org.apiguardian_1.1.0.v20190826-0900.jar:/app/eclipse/plugins/org.junit_4.13.0.v20200204-1500.jar:/app/eclipse/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar:/run/flatpak/doc/d899fe34/org.junit_4.13.0.v20200204-1500.jar:/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib/ant-launcher.jar:/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib/ant.jar:/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib/ant-junit.jar:/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib/ant-junit4.jar" />
+    <property name="env.HOME" value="/home/marcos" />
+    <property name="source" value="16" />
+    <property name="env.PAM_KWALLET5_LOGIN" value="/run/user/1000/kwallet5.socket" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="env.LC_MONETARY" value="es_ES.UTF-8" />
+    <property name="env.BROWSER" value="/usr/bin/firefox" />
+    <property name="env.XDG_DATA_DIRS" value="/app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share" />
+    <property name="java.vm.specification.version" value="16" />
+    <property name="os.name" value="Linux" />
+    <property name="env.DISPLAY" value=":99.0" />
+    <property name="user.country" value="US" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="env.LD_LIBRARY_PATH" value="" />
+    <property name="ant.file.type.TuringMachine" value="file" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="user.home" value="/home/marcos" />
+    <property name="env.EDITOR" value="/usr/bin/nano" />
+    <property name="user.language" value="en" />
+    <property name="ant.java.version" value="16" />
+    <property name="env.LC_PAPER" value="es_ES.UTF-8" />
+    <property name="env.ANT_HOME" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445" />
+    <property name="env.LANGUAGE" value="en_US.UTF-8" />
+    <property name="env.DBUS_SESSION_BUS_ADDRESS" value="unix:path=/run/flatpak/bus" />
+    <property name="ant.file" value="/home/marcos/Projects/TuringMachine/build.xml" />
+    <property name="env.ALSA_CONFIG_DIR" value="/usr/share/alsa" />
+    <property name="path.separator" value=":" />
+    <property name="os.version" value="5.15.2-2-MANJARO" />
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+    <property name="env.XDG_SESSION_ID" value="1" />
+    <property name="env.MAIL" value="/var/spool/mail/marcos" />
+    <property name="ant.project.invoked-targets" value="build,build-project,junitreport,Example1,Example2,Example3,Example4" />
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+    <property name="env.KDE_SESSION_UID" value="1000" />
+    <property name="env.LC_ADDRESS" value="es_ES.UTF-8" />
+    <property name="env.KDE_APPLICATIONS_AS_SCOPE" value="1" />
+    <property name="env.SHELL" value="/bin/sh" />
+    <property name="env.XDG_SEAT_PATH" value="/org/freedesktop/DisplayManager/Seat0" />
+    <property name="ant.core.lib" value="/app/eclipse/plugins/org.apache.ant_1.10.11.v20210720-1445/lib/ant.jar" />
+    <property name="env.GTK_MODULES" value="canberra-gtk-module" />
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/" />
+    <property name="env.GI_TYPELIB_PATH" value="/app/lib/girepository-1.0" />
+    <property name="env.XDG_CONFIG_DIRS" value="/app/etc/xdg:/etc/xdg" />
+    <property name="env.container" value="flatpak" />
+    <property name="user.dir" value="/home/marcos/Projects/TuringMachine" />
+    <property name="os.arch" value="amd64" />
+    <property name="env.GTK3_MODULES" value="xapp-gtk3-module" />
+    <property name="target" value="16" />
+    <property name="env.XDG_CURRENT_DESKTOP" value="KDE" />
+    <property name="env.DESKTOP_SESSION" value="plasma" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.vm.version" value="16.0.2+7-67" />
+    <property name="env.SYSTEMD_EXEC_PID" value="1120" />
+    <property name="env.GTK2_RC_FILES" value="/etc/gtk-2.0/gtkrc:/home/marcos/.gtkrc-2.0:/home/marcos/.config/gtkrc-2.0" />
+    <property name="env.LIBOVERLAY_SCROLLBAR" value="0" />
+    <property name="env.USER" value="marcos" />
+    <property name="java.class.version" value="60.0" />
+    <property name="env.QT_AUTO_SCREEN_SCALE_FACTOR" value="0" />
+    <property name="ant.project.default-target" value="build" />
+  </properties>
+  <testcase classname="tests.Example3" name="test[0: state{0q0111110111100}; =&gt; 1]" time="0.002" />
+  <testcase classname="tests.Example3" name="test[1: state{0q0110111100}; =&gt; 0]" time="0.0" />
+  <testcase classname="tests.Example3" name="test[2: state{0q0101111}; =&gt; 0]" time="0.001" />
+  <testcase classname="tests.Example3" name="test[3: state{0q011110100}; =&gt; 3]" time="0.0" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
