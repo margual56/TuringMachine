@@ -1,5 +1,13 @@
 [![JUnit Report](https://github.com/margual56/TuringMachine/actions/workflows/junit.yml/badge.svg?branch=master)](https://github.com/margual56/TuringMachine/actions/workflows/junit.yml)
 
+# DEPRECATION WARNING ⚠️
+
+This program is no longer maintained!
+
+Please, use the newer version: [https://github.com/margual56/turing-machine-2.0](https://github.com/margual56/turing-machine-2.0)
+
+It has lots of new cool features, a better syntaxis and it's written in rust!
+
 # TuringMachine
 A [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) interpreter made in Java using Processing libraries.
 
